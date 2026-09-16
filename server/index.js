@@ -1,13 +1,19 @@
 import express from 'express'
 import * as dotenv from 'dotenv'
 import cors from 'cors'
-import connectDB from "./db/connect"
+import connectDB from "./db/connect.js"
+import postRoutes from "./routes/postRoutes.js"
+import artifexRoutes from "./routes/artifexRoutes.js"
+
 
 dotenv.config();
 
 const app = express()
 app.use(cors())
 app.use(express.json({limit:"50mb"}))
+app.use("/api/v1/post", postRoutes)
+app.use("/api/v1/artifex", artifexRoutes)
+
 
 app.get("/", async (req, res)=>{
     res.send("Hello from Artifex!")
